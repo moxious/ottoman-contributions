@@ -1,3 +1,11 @@
+## Bug Tracker
+
+They use jira instead of github issues, here:
+
+https://issues.couchbase.com/projects/OTTOJS/issues
+
+Having some issues logging in (doesn't accept couchbase forum login).  
+
 ## -- Custom ID Fields --
 
 Custom ID fields not working is more of a bug.  If your custom ID field is undefined though, that should not cause the whole key to be undefined.
