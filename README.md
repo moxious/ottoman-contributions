@@ -99,6 +99,17 @@ of items.
 
 Instead it would be nice to do a bulk save on hundreds or thousands at a time.
 
+In the docs for server 4.0, there's a mention that this can be done in node.js,
+but no code sample:
+
+http://developer.couchbase.com/documentation/server/4.0/developer-guide/batching-operations.html
+
+We know it's a possibility with .NET:
+http://docs.couchbase.com/developer/dotnet-2.0/bulk-operations.html
+
+And java:
+http://docs.couchbase.com/developer/java-2.0/documents-bulk.html
+
 ### Ottoman Test Suite
 
 At present it looks under-specified; it tests mainly the Ottoman API but
