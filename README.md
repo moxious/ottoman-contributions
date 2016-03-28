@@ -2,7 +2,7 @@
 
 An ODM for couchbase. :)  But seriously, we have a lot of data we're pulling from an old relational database via an API, and then putting into JSON documents.  As such, we do end up with various RDBMS integer keys, not just things like UUIDs.
 
-## Things we're thinking about/doing
+## Topics
 
 (Listed in decreasing order of focus, most important stuff first)
 
@@ -12,9 +12,10 @@ An ODM for couchbase. :)  But seriously, we have a lot of data we're pulling fro
 
 ### Upsert
 
-(Erik?)
+(**Erik please add more here**)
 
-Couchbase has upsert.  We want it in Ottoman.
+Couchbase has upsert.  We want it in Ottoman.  We have the code, it's just a
+matter of how to contribute it.
 
 ### Failure to build many n1ql indexes at once
 
@@ -32,6 +33,12 @@ n1ql query has the signature (err, rows, meta).   Some ottoman callbacks
 are only checking for err !# null; when an index build fails, err === null,
 but "meta" is telling you why.   (Arguably this is a problem with the Couchbase
 node SDK, that index fail should be an actual error)
+
+Side note:  we observe errors in Ottoman when trying to do stuff with models
+before ensureIndices() has called its callback.  Would like to talk about that
+a bit, and it would be desirable that when that callback fires, we can be sure
+the indexes are in place enough to be functional, since there is a lot of
+follow-on code that happens, which will use them.
 
 ### Ottoman Array Field Types have a bug
 
@@ -58,6 +65,11 @@ pick just one way of doing this, or support what's in the docs.
 We use promises heavily, and we'd love to see a promisified Ottoman rather than
 using callbacks.  In some cases we use `Promise.promisify`, but it'd be nice
 to explore options for making a native promises option.
+
+We don't know how many other people are using Ottoman.  Making everything work
+by promises would be a breaking change; a second option is a wrapper, i.e.
+ottoman.Model vs. ottoman.PromiseModel where they have the same API, just one
+works via Promises.  Open to discussion on other options.
 
 ### Query-defined methods on model instances
 
