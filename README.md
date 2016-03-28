@@ -1,22 +1,22 @@
-== What we're using ottoman for
+## What we're using ottoman for
 
 An ODM for couchbase. :)  But seriously, we have a lot of data we're pulling from an old relational database via an API, and then putting into JSON documents.  As such, we do end up with various RDBMS integer keys, not just things like UUIDs.
 
-== Things we're thinking about/doing
+## Things we're thinking about/doing
 
 (Listed in decreasing order of focus, most important stuff first)
 
-=== Custom ID fields for "natural keys"
+### Custom ID fields for "natural keys"
 
 (Erik?)
 
-=== Upsert
+### Upsert
 
 (Erik?)
 
 Couchbase has upsert.  We want it in Ottoman.
 
-=== Failure to build many n1ql indexes at once
+### Failure to build many n1ql indexes at once
 
 Thread reported here, so as to not be repeated:
 https://forums.couchbase.com/t/ottoman-n1ql-index-building-issue/7532
@@ -29,11 +29,11 @@ On top of that, there are various handlers in ottoman that are silently
 swallowing errors.  Some errors (like index builds) come through in the "meta"
 information, not in the "err" on the callback.   I.e. the callback for an
 n1ql query has the signature (err, rows, meta).   Some ottoman callbacks
-are only checking for err != null; when an index build fails, err === null,
+are only checking for err !# null; when an index build fails, err ### null,
 but "meta" is telling you why.   (Arguably this is a problem with the Couchbase
 node SDK, that index fail should be an actual error)
 
-=== Ottoman Array Field Types have a bug
+### Ottoman Array Field Types have a bug
 
 If I specify a field like this:
 `fooProperty: ['string']`
@@ -53,19 +53,19 @@ Ottoman expects the inside of the array to be an object, like this:
 Except that the docs explain that the other way is OK.  So ottoman needs to
 pick just one way of doing this, or support what's in the docs.
 
-=== Promises
+### Promises
 
 We use promises heavily, and we'd love to see a promisified Ottoman rather than
 using callbacks.  In some cases we use `Promise.promisify`, but it'd be nice
 to explore options for making a native promises option.
 
-== Deferred Indexes
+## Deferred Indexes
 
 Not entirely sure what causes the "one-by-one" index creation but with n1ql
 indexes, but I can replicate it.  Interested in exploring deferred index
 building.
 
-=== Query-defined methods on model instances
+### Query-defined methods on model instances
 
 It'd be very nice to be able to define an n1ql query on a model instance, and
 execute it as a JS function.  I.e. having a model Foo, I'd like to have an easy
@@ -82,7 +82,7 @@ would find another `Person` where `oldId: 20`.   Ottoman doesn't need to do
 this for me, it just needs to make it possible for me to do this without
 getting into prototype functions perhaps.
 
-=== Couchbase, Ottoman, and Sync Gateway
+### Couchbase, Ottoman, and Sync Gateway
 
 One of the problems I run into is that ottoman uses `_type` to distinguish
 between the models. Because couchbase has to use the same logic as couchdb,
@@ -96,7 +96,7 @@ dev about this, he says the code is not in a state where a pull request would
 be good, but removing dependence on `_type` or making it configurable would be
 desirable.
 
-=== Ottoman Test Suite
+### Ottoman Test Suite
 
 At present it looks under-specified; it tests mainly the Ottoman API but
 doesn't do any integration testing with an actual couchbase server or with the
