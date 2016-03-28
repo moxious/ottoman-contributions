@@ -6,6 +6,11 @@ An ODM for couchbase. :)  But seriously, we have a lot of data we're pulling fro
 
 (Listed in decreasing order of focus, most important stuff first)
 
+Some of these things we already have working code for, it's just a matter of
+agreeing where/how to put it into Ottoman and then making a pull request. 
+
+Others are points of discussion that need code development.
+
 ### Custom ID fields for "natural keys"
 
 Refdoc indexes depend on data in their fields being unique, because the value is 
