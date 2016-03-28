@@ -22,8 +22,8 @@ Thread reported here, so as to not be repeated:
 https://forums.couchbase.com/t/ottoman-n1ql-index-building-issue/7532
 
 Short version, it looks like for building GSI / n1ql indexes, Ottoman needs to
-move to a model of creating them all with {"defer_build":true} and then just
-issue a BUILD INDEX command.
+move to a model of creating them all with ```{"defer_build":true}``` and then just
+issue a `BUILD INDEX` command.
 
 On top of that, there are various handlers in ottoman that are silently
 swallowing errors.  Some errors (like index builds) come through in the "meta"
@@ -58,12 +58,6 @@ pick just one way of doing this, or support what's in the docs.
 We use promises heavily, and we'd love to see a promisified Ottoman rather than
 using callbacks.  In some cases we use `Promise.promisify`, but it'd be nice
 to explore options for making a native promises option.
-
-## Deferred Indexes
-
-Not entirely sure what causes the "one-by-one" index creation but with n1ql
-indexes, but I can replicate it.  Interested in exploring deferred index
-building.
 
 ### Query-defined methods on model instances
 
