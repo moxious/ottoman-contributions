@@ -96,6 +96,15 @@ dev about this, he says the code is not in a state where a pull request would
 be good, but removing dependence on `_type` or making it configurable would be
 desirable.
 
+### Bulk Insert
+
+It would be nice to have a bulk create/save on Ottoman models.  When we do
+data loading, we don't want to call save on each object, or post them
+individually to a REST endpoint, because that's slow if you have thousands
+of items.
+
+Instead it would be nice to do a bulk save on hundreds or thousands at a time.
+
 ### Ottoman Test Suite
 
 At present it looks under-specified; it tests mainly the Ottoman API but
