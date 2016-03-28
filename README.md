@@ -29,7 +29,7 @@ On top of that, there are various handlers in ottoman that are silently
 swallowing errors.  Some errors (like index builds) come through in the "meta"
 information, not in the "err" on the callback.   I.e. the callback for an
 n1ql query has the signature (err, rows, meta).   Some ottoman callbacks
-are only checking for err !# null; when an index build fails, err ### null,
+are only checking for err !# null; when an index build fails, err === null,
 but "meta" is telling you why.   (Arguably this is a problem with the Couchbase
 node SDK, that index fail should be an actual error)
 
