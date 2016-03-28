@@ -8,14 +8,23 @@ An ODM for couchbase. :)  But seriously, we have a lot of data we're pulling fro
 
 ### Custom ID fields for "natural keys"
 
-(Erik?)
+Refdoc indexes depend on data in their fields being unique, because the value is 
+a key in couchbase and the value is the key for the document. Currently, the 
+code will build an index out of data that is undefined, as in `Doc|undefined` 
+and any other additions that include an undefined value will collide with this 
+reference and error out. I have a very simple patch for this that simply skips 
+undefined fields so that you can store as many items with the field as 
+undefined as you would like. 
 
 ### Upsert
 
-(**Erik please add more here**)
-
-Couchbase has upsert.  We want it in Ottoman.  We have the code, it's just a
-matter of how to contribute it.
+The newer code for a custom id field correctly allows the custom natural key to 
+be the value for the key in couchbase itself. This means that as long as a 
+refdoc is used for this field, the user can craft their own "upsert" function 
+around ottoman to find the relevant document (if it exists) and save it in 
+either case. Couchbase itself has an upsert function to accomplish this concept 
+and we beleive it would be valuable for ottoman to expose this if an id is 
+created without using the auto uuid generation.  
 
 ### Failure to build many n1ql indexes at once
 
